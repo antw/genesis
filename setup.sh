@@ -11,7 +11,7 @@
 source "./lib/create-directory.sh"
 source "./lib/run-recipe.sh"
 source "./lib/run-role.sh"
-source "./lib/say-with-time.sh"
+source "./lib/say.sh"
 
 if [ -f "./servers/$1.sh" ] ; then
   source "./servers/$1.sh"
