@@ -5,21 +5,26 @@
 #
 # For example:
 #
-#   ssh -t user@server "bash setup.sh app-server"
+#   ssh -t user@server "./setup.sh app-server"
 #
+
+# Genesis setup.
+
+genesis_path="$( cd "$( dirname "$0" )" && pwd )"
+echo $genesis_path
 
 # Load lib/*
 
-for file in lib/*.sh ; do
+for file in $genesis_path/lib/*.sh ; do
   source $file
 done
 
 # Off we go...!
 
-if [ -f "./servers/$1.sh" ] ; then
+if [ -f "$genesis_path/servers/$1.sh" ] ; then
   genesis_run_recipe "bootstrap"
-  source "./servers/$1.sh"
+  source "$genesis_path/servers/$1.sh"
   genesis_say_header "All done!"
 else
-  echo "No such server: ./servers/$1.sh"
+  echo "No such server: $1"
 fi
