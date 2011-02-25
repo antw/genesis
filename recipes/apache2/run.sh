@@ -23,6 +23,6 @@ reload_apache() {
 apt-get install apache2
 
 # Create Apache directories.
-genesis_create_dir $apache_dir/ssl    0755 "root:root"
-genesis_create_dir $apache_dir/conf.d 0755 "root:root"
-genesis_create_dir $apache_cache_dir  0755 "root:root"
+genesis_create_dir "$apache_dir/ssl"    0755 "root:root"
+genesis_create_dir "$apache_dir/conf.d" 0755 "root:root"
+genesis_create_dir "$apache_cache_dir"  0755 "root:root"
