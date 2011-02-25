@@ -7,12 +7,12 @@ local apache_binary="/usr/sbin/apache2"
 local apache_icon_dir="/usr/share/apache2/icons"
 local apache_cache_dir="/var/cache/apache2"
 
-__restart_apache() {
+restart_apache() {
   /usr/sbin/invoke-rc.d apache2 restart
   sleep 1
 }
 
-__reload_apache() {
+reload_apache() {
   /usr/sbin/invoke-rc.d apache2 reload
   sleep 1
 }
@@ -28,4 +28,4 @@ genesis_create_dir $apache_dir/conf.d 0755 "root:root"
 genesis_create_dir $apache_cache_dir  0755 "root:root"
 
 # All done.
-__restart_apache
+restart_apache
