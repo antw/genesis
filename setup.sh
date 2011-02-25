@@ -15,6 +15,7 @@ source "./lib/say.sh"
 
 if [ -f "./servers/$1.sh" ] ; then
   source "./servers/$1.sh"
+  genesis_say_header "All done!"
 else
   echo "No such server: ./servers/$1.sh"
 fi
