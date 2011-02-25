@@ -23,15 +23,18 @@ __genesis_run_component() {
 
   if [[ "$2" = "" ]] ; then
     echo "Ran genesis_run_$1 with no $1 provided"
+    exit 1
 
   elif [ -f "$component_dir/run.sh" ] ; then
-    source "$component_dir/run.sh"
+    #source "$component_dir/run.sh"
 
     # If the recipe has any fixture files, copy them.
     [ -d "$component_dir/files" ] && copy -r "$component_dir/files" /
 
     # If the recipe has an after "filter", run it now.
     [ -f "$component_dir/after.sh" ] && source "$component_dir/after.sh"
+
+    return 0
 
   else
     echo "No such $1: $2"
