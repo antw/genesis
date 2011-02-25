@@ -8,6 +8,9 @@
 #   ssh -t user@server "bash setup.sh app-server"
 #
 
+source "./lib/say-with-time.sh"
+source "./lib/run-role.sh"
+
 if [ -f "./servers/$1.sh" ] ; then
   source "./servers/$1.sh"
 else
