@@ -9,4 +9,3 @@ genesis_run_recipe() {
     exit 1
   fi
 }
-
