@@ -5,7 +5,7 @@
 #
 # For example:
 #
-#   ssh -t user@server "./setup.sh app-server"
+#   ssh -t user@server "./genesis.sh app-server"
 #
 
 # Genesis setup.
