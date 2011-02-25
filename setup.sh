@@ -17,6 +17,7 @@ done
 # Off we go...!
 
 if [ -f "./servers/$1.sh" ] ; then
+  genesis_run_recipe "bootstrap"
   source "./servers/$1.sh"
   genesis_say_header "All done!"
 else
