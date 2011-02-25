@@ -8,10 +8,13 @@
 #   ssh -t user@server "bash setup.sh app-server"
 #
 
-source "./lib/create-directory.sh"
-source "./lib/run-recipe.sh"
-source "./lib/run-role.sh"
-source "./lib/say.sh"
+# Load lib/*
+
+for file in lib/*.sh ; do
+  source $file
+done
+
+# Off we go...!
 
 if [ -f "./servers/$1.sh" ] ; then
   source "./servers/$1.sh"
