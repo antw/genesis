@@ -1,2 +1,2 @@
 # Installs git using the Ubuntu packages system.
-apt-get install git-core
+sudo apt-get install git-core
