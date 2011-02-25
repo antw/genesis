@@ -18,5 +18,5 @@ genesis_say_with_time() {
 #   # => [17:32:04] => Starting something
 #
 genesis_say_header() {
-  echo "[$(date '+%H:%M:%S')] => $1"
+  echo -e "\n[$(date '+%H:%M:%S')] => $1"
 }
