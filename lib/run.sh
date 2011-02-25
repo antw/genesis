@@ -11,6 +11,13 @@ genesis_run_role() {
   __genesis_run_component "role" $1
 }
 
+# Runs a single server declaration. Expected to be at
+# $genesis_path/servers/$1/run.sh
+#
+genesis_run_server() {
+  __genesis_run_component "server" $1
+}
+
 # Runs something; a recipe, role, or server.
 #
 # $1 = A noun: "recipe", "role", or "server".
@@ -26,7 +33,9 @@ __genesis_run_component() {
     exit 1
 
   elif [ -f "$component_dir/run.sh" ] ; then
-    #source "$component_dir/run.sh"
+    # Some components may lack a run file (such as those which simply
+    # copy files across).
+    [ -f "$component_dir/run.sh" ] && source "$component_dir/run.sh"
 
     # If the recipe has any fixture files, copy them.
     [ -d "$component_dir/files" ] && copy -r "$component_dir/files" /

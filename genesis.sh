@@ -14,7 +14,6 @@ set -o nounset # Exit immediately if an unknown variable is encountered.
 set -o errexit # Exit if any command exits with non-zero status.
 
 genesis_path="$( cd "$( dirname "$0" )" && pwd )"
-echo $genesis_path
 
 # Load lib/*
 
@@ -24,9 +23,9 @@ done
 
 # Off we go...!
 
-if [ -f "$genesis_path/servers/$1.sh" ] ; then
+if [ -d "$genesis_path/servers/$1" ] ; then
   genesis_run_recipe "bootstrap"
-  source "$genesis_path/servers/$1.sh"
+  genesis_run_server $1
   genesis_say_header "All done!"
 else
   echo "No such server: $1"
