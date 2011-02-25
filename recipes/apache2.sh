@@ -20,7 +20,7 @@ __reload_apache() {
 # RECIPE
 # ----------------------------------------------------------------------------
 
-sudo apt-get install apache2
+apt-get install apache2
 
 # Create Apache directories.
 genesis_create_dir $apache_dir/ssl    0755 "root:root"
