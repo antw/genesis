@@ -28,6 +28,7 @@ fi
 # Genesis setup.
 
 declare -r genesis_path="$( cd "$( dirname "$0" )" && pwd )"
+declare -r genesis_tmp_path="$genesis_path/tmp"
 
 # Load lib/*
 
