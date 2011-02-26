@@ -13,7 +13,7 @@
 set -o nounset # Exit immediately if an unknown variable is encountered.
 set -o errexit # Exit if any command exits with non-zero status.
 
-genesis_path="$( cd "$( dirname "$0" )" && pwd )"
+declare -r genesis_path="$( cd "$( dirname "$0" )" && pwd )"
 
 # Load lib/*
 
