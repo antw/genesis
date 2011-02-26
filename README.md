@@ -47,7 +47,7 @@ structure inside:
 
           - contrib/
 
-            A directory containing sources, .deb pages, etc, which
+            A directory containing sources, .deb packages, etc, which
             are _not_ copied to the server root, but may be used by
             run.sh or after.sh
 
