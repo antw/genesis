@@ -25,24 +25,31 @@ Recipes, roles, and servers should each have their own directory which
 matches the name of the component, with the following directory
 structure inside:
 
-* **`run.sh`** This is the first script called and should perform
-  initial installation, set variables, define functions, etc.
+    - genesis/
+      - {recipes,roles,servers}/
+        - my-component/
 
-* **`files/`** An directory containing files (or directories) to be
-  copied into the server root. This copy if performed after running
-  `run.sh` but before...
+          - run.sh
 
-* **`after.sh`** Effectively an after "filter", this is run after files
-  are copied.
+            This is the first script called and should perform
+            initial installation, set variables, define functions,
+            etc.
 
-All three of the above files/directories are optional. Genesis will skip
-any which aren't present.
+          - files/
 
-Component directories may also contain a four sub-directory.
+            A directory containing files (or directories) to be
+            copied into the server root. This copy if performed after
+            running run.sh but before...
 
-* **`contrib/`** A directory containing sources, .deb pages, etc, which
-  are _not_ copied to the server root, but may be used by `run.sh` or
-  `after.sh`.
+          - after.sh
+
+            Acts as an after filter; run after files are copied.
+
+          - contrib/
+
+            A directory containing sources, .deb pages, etc, which
+            are _not_ copied to the server root, but may be used by
+            run.sh or after.sh
 
 USAGE
 -----
