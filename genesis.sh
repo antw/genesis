@@ -8,8 +8,9 @@
 #   ssh -t user@server "./genesis.sh app-server"
 #
 
-set -o nounset # Exit immediately if an unknown variable is encountered.
-set -o errexit # Exit if any command exits with non-zero status.
+set -o nounset    # Exit immediately if an unknown variable is encountered.
+set -o errexit    # Exit if any command exits with non-zero status.
+shopt -s extglob  # Extended globs
 
 # Require Ubuntu 10.04 for now.
 
