@@ -32,7 +32,7 @@ __genesis_run_component() {
     echo "Ran genesis_run_$1 with no $1 provided"
     exit 1
 
-  elif [ -f "$component_dir/run.sh" ] ; then
+  elif [ -d "$component_dir" ] ; then
     # Some components may lack a run file (such as those which simply
     # copy files across).
     [ -f "$component_dir/run.sh" ] && source "$component_dir/run.sh"
