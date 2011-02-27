@@ -55,6 +55,12 @@ sudo passwords):
 
 ... and you're done!
 
+Prior to running the server set-up, Genesis automatically runs the
+bootstrap and openssh recipies. bootstrap is responsible for updating
+the system, and openssh will adjust the OpenSSH configuration to
+**disable root login**. Do not run `genesis.sh` until you have added
+your SSH user to the sudoers file.
+
 DETAILS
 -------
 
