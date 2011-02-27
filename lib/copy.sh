@@ -6,13 +6,13 @@ genesis_copy_recipe_files() {
 
 # Copies files for a role.
 #
-genesis_copy_recipe_files() {
+genesis_copy_role_files() {
   __genesis_copy_component_files "role" $1
 }
 
 # Copies files for a server.
 #
-genesis_copy_recipe_files() {
+genesis_copy_server_files() {
   __genesis_copy_component_files "server" $1
 }
 
@@ -23,7 +23,7 @@ __genesis_copy_component_files() {
   # naive pluralisation - - - - - - - ^
 
   if [ -d "$component_dir" ] ; then
-    cp -r $component_dir/files/* /
+    cp -r $component_dir/* /
   else
     echo "No files to copy at $component_dir"
     exit 1
