@@ -40,6 +40,8 @@ done
 
 if [ -d "$genesis_path/servers/$1" ] ; then
   genesis_run_recipe "bootstrap"
+  genesis_run_recipe "openssh"
+
   genesis_run_server $1
   genesis_say_header "All done!"
 else
