@@ -27,29 +27,18 @@ structure inside:
 
     - genesis/
       - {recipes,roles,servers}/
+        - my-component.sh
+
+          This is main script for the component, and is called by
+          Genesis.
+
         - my-component/
 
-          - run.sh
-
-            This is the first script called and should perform
-            initial installation, set variables, define functions,
-            etc.
-
-          - files/
-
-            A directory containing files (or directories) to be
-            copied into the server root. This copy if performed after
-            running run.sh but before...
-
-          - after.sh
-
-            Acts as an after filter; run after files are copied.
-
-          - contrib/
-
-            A directory containing sources, .deb packages, etc, which
-            are _not_ copied to the server root, but may be used by
-            run.sh or after.sh
+          An optional directory containing files (or directories) to
+          be copied into the server root. This copy is not performed
+          implictly by Genesis, but rather when you run
+          genesis_copy_{recipe,role,server}_files with the name of the
+          component.
 
 USAGE
 -----

@@ -38,7 +38,7 @@ done
 
 # Off we go...!
 
-if [ -d "$genesis_path/servers/$1" ] ; then
+if [ -f "$genesis_path/servers/$1.sh" ] ; then
   genesis_run_recipe "bootstrap"
   genesis_run_recipe "openssh"
 
