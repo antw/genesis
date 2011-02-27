@@ -22,7 +22,7 @@ __genesis_copy_component_files() {
   local component_dir="$genesis_path/$1s/$2"
   # naive pluralisation - - - - - - - ^
 
-  if [ -d "$component_dir" ] ;
+  if [ -d "$component_dir" ] ; then
     cp -r $component_dir/files/* /
   else
     echo "No files to copy at $component_dir"
