@@ -23,6 +23,7 @@ __genesis_copy_component_files() {
   # naive pluralisation - - - - - - - ^
 
   if [ -d "$component_dir" ] ; then
+    genesis_say_with_time "Copying $2 $1 files"
     cp -r $component_dir/* /
   else
     echo "No files to copy at $component_dir"
