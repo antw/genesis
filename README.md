@@ -45,13 +45,13 @@ USAGE
 
 Genesis should be copied to the new server thusly:
 
-    $ scp -r genesis/ user@machine
+    $ rsync -avz --delete -e ssh genesis/ user@machine:genesis
 
 Then run the command with the name of the server to be set up (the -t
 flag tells OpenSSH to use a pseudo-tty in order to allow you to enter
 sudo passwords):
 
-    $ ssh -t user@machine "./genesis/genesis.sh server-component-name"
+    $ ssh -t user@machine "sudo -s ./genesis/genesis.sh server-component-name"
 
 ... and you're done!
 
