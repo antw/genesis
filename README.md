@@ -11,15 +11,15 @@ roles, and servers.
 
 Recipes are the smallest possible scripts, intended to set up single
 pieces of software (and no more) such as Apache, Nginx, RVM, etc.
-Recipies are then combined into "roles" which combine recipes into
-larger, reusuable units such as "rails-stack", "mysql-stack", etc.
+Recipies are then combined into "roles" which such as "rails-stack",
+"mysql-stack", etc.
 
-Finally, servers permit roles to be combines on a server-by-server
-basis. You might, for example, wish to combine "rails-stack" and
-"mysql-stack" roles into a single "standalone" server, or perhaps a
-"redis" recipie with a "resque-stack" to create a dedicated job server.
-Server components are also an ideal place to specify machine-specific
-configuration.
+Finally, servers permit you to set up individual machines using the
+roles which have been defined. You might for example, wish to combine
+"rails-stack" and "mysql-stack" roles into a single "standalone" server,
+or perhaps a "redis" recipie with a "resque-stack" to create a
+dedicated job server. Server components are also an ideal place to
+specify machine-specific configuration.
 
 Recipes, roles, and servers should each have their own directory which
 matches the name of the component, with the following directory
@@ -39,6 +39,12 @@ structure inside:
           implictly by Genesis, but rather when you run
           genesis_copy_{recipe,role,server}_files with the name of the
           component.
+
+As Genesis can't know which roles use which recipes, you should stick
+to the convention of only using recipes within roles, and only using
+roles within servers, otherwise you may end up running a recipe many
+times. See the existing "rails" role, and "app-server" server for
+examples.
 
 USAGE
 -----
