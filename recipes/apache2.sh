@@ -18,13 +18,10 @@ reload_apache() {
 
 aptitude install -y apache2
 
-# Create Apache directories.
+# These _should_ exist already, but just to be sure...
 genesis_create_dir "$apache_dir/ssl"    "u=rwx,go=rx" "root:root"
 genesis_create_dir "$apache_dir/conf.d" "u=rwx,go=rx" "root:root"
 genesis_create_dir "$apache_cache_dir"  "u=rwx,go=rx" "root:root"
 
-# Copy config.
 genesis_copy_recipe_files "apache2"
-
-# Once Apache configuration is done, restart.
 restart_apache
