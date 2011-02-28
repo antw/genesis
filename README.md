@@ -40,11 +40,10 @@ structure inside:
           genesis_copy_{recipe,role,server}_files with the name of the
           component.
 
-As Genesis can't know which roles use which recipes, you should stick
-to the convention of only using recipes within roles, and only using
-roles within servers, otherwise you may end up running a recipe many
-times. See the existing "rails" role, and "app-server" server for
-examples.
+So long as you use the provided `install_package` and `run_recipe`
+helpers, Genesis will keep track of the packages and recipes you have
+run, so you can safely mix-and-match recipes and roles without worrying
+about installing the same software multiple times.
 
 USAGE
 -----
