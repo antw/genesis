@@ -16,7 +16,7 @@ reload_apache() {
 # RECIPE
 # ----------------------------------------------------------------------------
 
-aptitude install -y apache2
+install_package 'apache2'
 
 # These _should_ exist already, but just to be sure...
 genesis_create_dir "$apache_dir/ssl"    "u=rwx,go=rx" "root:root"

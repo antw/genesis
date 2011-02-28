@@ -1,5 +1,7 @@
 # Install prerequisites
-aptitude install -y zlib1g-dev libssl-dev libreadline5-dev
+install_package 'zlib1g-dev'
+install_package 'libssl-dev'
+install_package 'libreadline5-dev'
 
 __install_ruby_enterprise () {
   case `uname -m` in

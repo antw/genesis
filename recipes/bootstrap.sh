@@ -4,4 +4,4 @@
 aptitude update
 
 # Required for CRC checks.
-aptitude install -y libarchive-zip-perl
+install_package 'libarchive-zip-perl'
