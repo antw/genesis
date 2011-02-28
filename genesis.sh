@@ -39,11 +39,11 @@ done
 # Off we go...!
 
 if [ -f "$genesis_path/servers/$1.sh" ] ; then
-  genesis_run_recipe "bootstrap"
-  genesis_run_recipe "openssh"
+  run_recipe "bootstrap"
+  run_recipe "openssh"
 
-  genesis_run_server $1
-  genesis_say_header "All done!"
+  run_server $1
+  say_header "All done!"
 else
   echo "No such server: $1"
 fi

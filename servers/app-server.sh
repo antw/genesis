@@ -1,1 +1,1 @@
-genesis_run_role "rails"
+run_role "rails"

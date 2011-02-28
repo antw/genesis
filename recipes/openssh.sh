@@ -1,2 +1,2 @@
-genesis_copy_recipe_files "openssh"
+copy_recipe_files "openssh"
 /etc/init.d/ssh restart
