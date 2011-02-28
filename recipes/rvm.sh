@@ -18,3 +18,6 @@
 
 aptitude install -y curl
 bash < <( curl -L http://bit.ly/rvm-install-system-wide )
+
+# Packages required for building Ruby.
+aptitude install -y build-essential zlib1g-dev libssl-dev libreadline5-dev
