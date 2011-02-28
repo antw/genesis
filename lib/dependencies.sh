@@ -11,7 +11,7 @@ recipe_deps=( '' )
 
 # Package which needs to be installed.
 install_package() {
-  package_name=$1
+  local package_name=$1
 
   if [ $( array_contains $package_name ${package_deps[@]} ) = -1 ] ; then
     say_with_time "Installing package: $package_name"
