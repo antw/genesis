@@ -1,6 +1,8 @@
 # Install dependencies.
 
-aptitude install -y build-essential libcurl4-openssl-dev zlib1g-dev
+install_package 'build-essential'
+install_package 'libcurl4-openssl-dev'
+install_package 'zlib1g-dev'
 
 # Install!
 

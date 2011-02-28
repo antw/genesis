@@ -16,8 +16,11 @@
 #  source '/usr/local/lib/rvm'
 #
 
-aptitude install -y curl
+install_package 'curl'
 bash < <( curl -L http://bit.ly/rvm-install-system-wide )
 
 # Packages required for building Ruby.
-aptitude install -y build-essential zlib1g-dev libssl-dev libreadline5-dev
+install_package 'build-essential'
+install_package 'zlib1g-dev'
+install_package 'libssl-dev'
+install_package 'libreadline5-dev'

@@ -2,10 +2,10 @@
 #
 # Example:
 #
-#   genesis_say_with_time "Starting something"
+#   say_with_time "Starting something"
 #   # => [17:32:04]    Starting something
 #
-genesis_say_with_time() {
+say_with_time() {
   echo "[$(date '+%H:%M:%S')]    $1"
 }
 
@@ -14,9 +14,9 @@ genesis_say_with_time() {
 #
 # Example:
 #
-#   genesis_say_header "Starting something"
+#   say_header "Starting something"
 #   # => [17:32:04] => Starting something
 #
-genesis_say_header() {
+say_header() {
   echo -e "\n[$(date '+%H:%M:%S')] => $1"
 }

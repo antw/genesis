@@ -18,4 +18,4 @@ if [ ! -f /etc/apt/sources.list.d/nginx-stable-lucid.list ] ; then
   aptitude remove python-software-properties unattended-upgrades
 fi
 
-apt-get install -y nginx
+install_package 'nginx'

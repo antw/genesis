@@ -1,3 +1,3 @@
-genesis_run_recipe "git"
-genesis_run_recipe "rvm"
-genesis_run_recipe "rvm-rubyee"
+run_recipe "git"
+run_recipe "rvm"
+run_recipe "rvm-rubyee"
