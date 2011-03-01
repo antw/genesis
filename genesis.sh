@@ -28,6 +28,7 @@ done
 
 declare -r genesis_path="$( cd "$( dirname "$0" )" && pwd )"
 declare -r genesis_tmp_path="${genesis_path}/tmp"
+declare -r genesis_run_log="${genesis_path}/log/run.log"
 
 # Load lib/*
 
@@ -44,7 +45,7 @@ done
 
 # Set up logs, and dry run.
 
-cat </dev/null > "${genesis_path}/log/run-log.txt"
+cat </dev/null > "${genesis_run_log}"
 
 if [[ "${genesis_dry_run:-""}" = '1' ]] ; then
   __init_dry_run
