@@ -1,3 +1,4 @@
 run_recipe "git"
-run_recipe "rubyee"
-run_recipe "passenger-nginx"
+run_recipe "rvm"
+rub_recipe "rvm-rubyee"
+run_recipe "apache2"
