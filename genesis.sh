@@ -11,19 +11,6 @@
 set -o errexit    # Exit if any command exits with non-zero status.
 shopt -s extglob  # Extended globs
 
-# Require Ubuntu 10.04 for now.
-
-if [ -f "/etc/lsb-release" ] ; then
-  source /etc/lsb-release
-  if [[ ! $DISTRIB_RELEASE = '10.04' ]] ; then
-    echo "Genesis requires Ubuntu 10.04. You have $DISTRIB_RELEASE"
-    exit 1
-  fi
-else
-  echo "Nothing found at /etc/lsb-release. Not Ubuntu?"
-  exit 1
-fi
-
 # Arguments.
 
 case "$1" in
@@ -36,17 +23,26 @@ esac
 declare -r genesis_path="$( cd "$( dirname "$0" )" && pwd )"
 declare -r genesis_tmp_path="$genesis_path/tmp"
 
-if [[ "${genesis_dry_run:-""}" = '1' ]] ; then
-  cat </dev/null > "${genesis_path}/log/dry-run.txt"
-fi
-
-cat </dev/null > "${genesis_path}/log/run-log.txt"
-
 # Load lib/*
 
 for file in $genesis_path/lib/*.sh ; do
+  if [[ $(basename $file) = "os-requirement.sh" ]] ; then
+    if [[ "${genesis_dry_run:-"0"}" = '1' ]] ; then
+      # Don't require Ubuntu when doing dry runs.
+      continue
+    fi
+  fi
+
   source $file
 done
+
+# Set up logs, and dry run.
+
+cat </dev/null > "${genesis_path}/log/run-log.txt"
+
+if [[ "${genesis_dry_run:-""}" = '1' ]] ; then
+  __init_dry_run
+fi
 
 # Off we go...!
 
