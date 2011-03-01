@@ -29,6 +29,7 @@ done
 declare -r genesis_path="$( cd "$( dirname "$0" )" && pwd )"
 declare -r genesis_tmp_path="${genesis_path}/tmp"
 declare -r genesis_run_log="${genesis_path}/log/run.log"
+declare -r genesis_dry_log="${genesis_path}/log/dry-run.sh.txt"
 
 # Load lib/*
 
@@ -64,7 +65,7 @@ if [ -f "${genesis_path}/servers/${server_name}.sh" ] ; then
   say_header "All done!"
 
   if [[ "${genesis_dry_run:-""}" = '1' ]] ; then
-    say "Dry run log saved to log/dry-run.txt"
+    say "Dry run log saved to log/dry-run.sh.txt"
   fi
 else
   echo "No such server: ${server_name:-"None specified"}"

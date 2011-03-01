@@ -6,7 +6,7 @@ run() {
 
   if [[ "${genesis_dry_run:-"0"}" = '1' ]] ; then
     # If this is a dry run, we output the command to a file...
-    echo "$cmd" >> "$genesis_path/log/dry-run.txt"
+    echo "$cmd" >> "${genesis_dry_log}"
   elif [[ "${genesis_verbose:-""}" = '1' ]] ; then
     # Verbose mode is enabled, just run the command.
     eval "${cmd}"
