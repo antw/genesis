@@ -74,7 +74,8 @@ your SSH user to the sudoers file.
 
     --verbose - Toggle verbose mode; instead of silencing the STDOUT of
                 commands being run by recipes, outputs everything for
-                you to view.
+                you to view. Without --verbose, the output of the
+                commands being run will be saved to log/run-log.txt.
 
     --dry-dun - Doesn't run any commands, instead outputs a copy of what
                 would have been run to ./logs/dry-run.txt

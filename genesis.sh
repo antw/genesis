@@ -40,6 +40,8 @@ if [[ "${genesis_dry_run:-""}" = '1' ]] ; then
   cat </dev/null > "${genesis_path}/log/dry-run.txt"
 fi
 
+cat </dev/null > "${genesis_path}/log/run-log.txt"
+
 # Load lib/*
 
 for file in $genesis_path/lib/*.sh ; do

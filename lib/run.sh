@@ -12,7 +12,6 @@ run() {
     eval "${cmd}"
   else
     # Silence output, and run command.
-    # Todo, output errors to ./log/run-log.txt
-    eval "${cmd} 1>/dev/null 2>&1"
+    eval "${cmd} 1>'$genesis_path/log/run-log.txt' 2>&1"
   fi
 }
