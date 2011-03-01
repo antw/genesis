@@ -4,13 +4,13 @@ local apache_dir="/etc/apache2"
 local apache_cache_dir="/var/cache/apache2"
 
 restart_apache() {
-  /usr/sbin/invoke-rc.d apache2 restart
-  sleep 1
+  run '/usr/sbin/invoke-rc.d apache2 restart'
+  run 'sleep 1'
 }
 
 reload_apache() {
-  /usr/sbin/invoke-rc.d apache2 reload
-  sleep 1
+  run '/usr/sbin/invoke-rc.d apache2 reload'
+  run 'sleep 1'
 }
 
 # RECIPE

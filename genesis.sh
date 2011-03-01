@@ -8,7 +8,6 @@
 #   ssh -t user@server "./genesis.sh app-server"
 #
 
-set -o nounset    # Exit immediately if an unknown variable is encountered.
 set -o errexit    # Exit if any command exits with non-zero status.
 shopt -s extglob  # Extended globs
 
@@ -25,10 +24,21 @@ else
   exit 1
 fi
 
+# Arguments.
+
+case "$1" in
+  --dry-run) declare -r genesis_dry_run=1 ; shift ;;
+  --verbose) declare -r genesis_verbose=1 ; shift ;;
+esac
+
 # Genesis setup.
 
 declare -r genesis_path="$( cd "$( dirname "$0" )" && pwd )"
 declare -r genesis_tmp_path="$genesis_path/tmp"
+
+if [[ "${genesis_dry_run:-""}" = '1' ]] ; then
+  cat </dev/null > "${genesis_path}/log/dry-run.txt"
+fi
 
 # Load lib/*
 
@@ -44,6 +54,11 @@ if [ -f "$genesis_path/servers/$1.sh" ] ; then
 
   run_server $1
   say_header "All done!"
+
+  if [[ "${genesis_dry_run:-""}" = '1' ]] ; then
+    say_with_time "Dry run log saved to log/dry-run.txt"
+  fi
 else
   echo "No such server: $1"
+  exit 1
 fi

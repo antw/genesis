@@ -2,4 +2,5 @@
 # this recipe requires that the "rvm" recipe be used first.
 #
 
-/usr/local/bin/rvm install 'ree'
+say_with_time 'Installing Ruby EE (may take a few minutes)'
+run "/usr/local/bin/rvm install 'ree'"

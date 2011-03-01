@@ -6,7 +6,7 @@
 #
 create_dir() {
   say_with_time "Creating directory $1"
-  mkdir -p $1
-  chmod $2 $1
-  chown -R $3 $1
+  run "mkdir -p $1"
+  run "chmod $2 $1"
+  run "chown -R $3 $1"
 }

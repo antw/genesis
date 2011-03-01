@@ -9,4 +9,4 @@ install_package 'libaprutil1-dev'
 
 # Install!
 
-/usr/local/bin/passenger-install-apache2-module --auto
+run '/usr/local/bin/passenger-install-apache2-module --auto'

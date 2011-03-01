@@ -45,8 +45,8 @@ helpers, Genesis will keep track of the packages and recipes you have
 run, so you can safely mix-and-match recipes and roles without worrying
 about installing the same software multiple times.
 
-USAGE
------
+USING GENESIS
+-------------
 
 Genesis should be copied to the new server thusly:
 
@@ -65,6 +65,19 @@ bootstrap and openssh recipies. bootstrap is responsible for updating
 the system, and openssh will adjust the OpenSSH configuration to
 **disable root login**. Do not run `genesis.sh` until you have added
 your SSH user to the sudoers file.
+
+### Usage
+
+    genesis.sh [Flags] ServerComponent
+
+### Flags
+
+    --verbose - Toggle verbose mode; instead of silencing the STDOUT of
+                commands being run by recipes, outputs everything for
+                you to view.
+
+    --dry-dun - Doesn't run any commands, instead outputs a copy of what
+                would have been run to ./logs/dry-run.txt
 
 DETAILS
 -------

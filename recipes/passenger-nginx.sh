@@ -6,7 +6,7 @@ install_package 'zlib1g-dev'
 
 # Install!
 
-/usr/local/bin/passenger-install-nginx-module \
+run '/usr/local/bin/passenger-install-nginx-module \
   --auto \
   --auto-download \
-  --prefix=/usr/local
+  --prefix=/usr/local'
