@@ -1,5 +1,6 @@
 # Project specific ignores ---------------------
 
+log
 tmp
 
 # Generic ignores ------------------------------
