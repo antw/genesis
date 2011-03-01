@@ -18,7 +18,7 @@ say_with_time() {
 #   # [17:32:04] => Starting something
 #
 say_header() {
-  echo -e "[$(date '+%H:%M:%S')] => $1"
+  echo "[$(date '+%H:%M:%S')] => $1"
 }
 
 # Says the given string ($1) prefixed with the current time and a
@@ -30,7 +30,7 @@ say_header() {
 #   # [17:32:04] <= Finished something
 #
 say_end_header() {
-  echo -e "[$(date '+%H:%M:%S')] <= $1"
+  echo "[$(date '+%H:%M:%S')] <= $1"
 }
 
 # Says the given string ($1) prefixed with the current time, and some
@@ -42,5 +42,5 @@ say_end_header() {
 #   # [17:32:04] !! Imperial troops have entered the base!
 #
 say_error() {
-  echo -e "[$(date '+%H:%M:%S')] !! $1"
+  echo "[$(date '+%H:%M:%S')] !! $1"
 }
