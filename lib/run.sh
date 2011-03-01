@@ -12,6 +12,6 @@ run() {
     eval "${cmd}"
   else
     # Silence output, and run command.
-    eval "${cmd} 1>'${genesis_path}/log/run-log.txt' 2>&1"
+    eval "${cmd} 1>>'${genesis_path}/log/run-log.txt' 2>&1"
   fi
 }
