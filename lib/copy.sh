@@ -24,7 +24,7 @@ copy_component_files() {
 
   if [ -d "$component_dir" ] ; then
     say_with_time "Copying $2 $1 files"
-    cp -r $component_dir/* /
+    run "cp -r $component_dir/* /"
   else
     echo "No files to copy at $component_dir"
     exit 1

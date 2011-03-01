@@ -10,9 +10,10 @@ run_recipe() {
   local recipe_name=$1
 
   if [ $( array_contains $recipe_name ${run_recipes[@]} ) = -1 ] ; then
-    say_header "Running recipe: $1"
-    __run_component "recipe" $1
+    say_header "Running recipe: $recipe_name"
+    __run_component "recipe" $recipe_name
     array_push 'run_recipes' $recipe_name
+    say_end_header "Finished recipe: $recipe_name"
   fi
 
   return 0

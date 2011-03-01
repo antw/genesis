@@ -1,2 +1,2 @@
-copy_recipe_files "openssh"
-/etc/init.d/ssh restart
+copy_recipe_files 'openssh'
+run '/etc/init.d/ssh restart'

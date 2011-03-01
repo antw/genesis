@@ -4,6 +4,9 @@ install_package 'libssl-dev'
 install_package 'libreadline5-dev'
 
 __install_ruby_enterprise () {
+  echo 'Ruby EE package not yet compatible with run()'
+  exit 1
+
   case `uname -m` in
     *i[3-6]86*)
       local file="ruby-enterprise_1.8.7-2011.03_i386_ubuntu10.04.deb"
