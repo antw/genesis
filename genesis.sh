@@ -14,8 +14,9 @@ shopt -s extglob  # Extended globs
 # Arguments.
 
 case "$1" in
-  --dry-run) declare -r genesis_dry_run=1 ; shift ;;
-  --verbose) declare -r genesis_verbose=1 ; shift ;;
+  --dry-run)      declare -r genesis_dry_run=1 ; shift ;;
+  --verbose)      declare -r genesis_verbose=1 ; shift ;;
+  --no-bootstrap) declare -r genesis_no_boot=1 ; shift ;;
 esac
 
 # Genesis setup.
@@ -47,8 +48,11 @@ fi
 # Off we go...!
 
 if [ -f "$genesis_path/servers/$1.sh" ] ; then
-  run_recipe "bootstrap"
-  run_recipe "openssh"
+  if [[ "${genesis_no_boot:-"0"}" = "0" ]] ; then
+    # Skip bootstrap if --no-bootstrap
+    run_recipe "bootstrap"
+    run_recipe "openssh"
+  fi
 
   run_server $1
   say_header "All done!"
