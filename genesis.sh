@@ -46,4 +46,5 @@ if [ -f "$genesis_path/servers/$1.sh" ] ; then
   say_header "All done!"
 else
   echo "No such server: $1"
+  exit 1
 fi
