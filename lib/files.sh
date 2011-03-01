@@ -7,22 +7,39 @@
 # $3 = crc
 #
 retrieve_file() {
-  if [ -f "$genesis_tmp_path/$1" ] ; then
-    if [[ ! `crc32 "$genesis_tmp_path/$1"` = $3 ]] ; then
-      # File exists, but CRC32 is wrong.
-      rm "$genesis_tmp_path/$1"
-    fi
-  fi
+  local filename=$1
+  local url=$2
+  local crc=$3
 
-  # If file doesn't exist, download it.
-  if [ ! -f "$genesis_tmp_path/$1" ] ; then
-    wget $2 "$genesis_tmp_path/$1"
+  install_package 'curl'
 
-    if [[ ! `crc32 "$genesis_tmp_path/$1"` = $3 ]] ; then
-      # File exists, but CRC32 is wrong.
-      rm "$genesis_tmp_path/$1"
-      echo "Wrong CRC: $1"
-      exit 1
+  if [[ "${genesis_dry_run:-""}" = "1" ]] ; then
+    # Not sure of the best way of handling remote files with dry runs,
+    # so defaulting to fetching the file each time for now.
+    run "( cd $genesis_tmp_path > /dev/null ; curl -L -s -O $url ; )"
+  else
+
+    # Required for CRC checks.
+    install_package 'libarchive-zip-perl'
+
+    if [ -f "$genesis_tmp_path/$filename" ] ; then
+      if [[ ! `crc32 "$genesis_tmp_path/$filename"` = $crc ]] ; then
+        # File exists, but CRC32 is wrong.
+        rm "$genesis_tmp_path/$filename"
+      fi
     fi
+
+    # If file doesn't exist, download it.
+    if [ ! -f "$genesis_tmp_path/$filename" ] ; then
+      ( cd $genesis_tmp_path > /dev/null ; curl -L -s -O $url ; )
+
+      if [[ ! `crc32 "$genesis_tmp_path/$filename"` = $crc ]] ; then
+        # File exists, but CRC32 is wrong.
+        rm "$genesis_tmp_path/$filename"
+        say_error "Wrong CRC: $filename"
+        exit 1
+      fi
+    fi
+
   fi
 }
