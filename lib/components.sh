@@ -42,7 +42,7 @@ __run_component() {
   local type=$1
   local name=$2
   local path="${genesis_path}/${type}s/${name}.sh"
-  # naive pluralisation - - - - - - - - - - - - - - - - ^
+  # naive pluralisation - - - - - - ^
 
   if [[ "${name}" = "" ]] ; then
     echo "Called run_${type} with no ${name} provided"
