@@ -5,7 +5,7 @@
 #   say_with_time "Starting something"
 #   # => [17:32:04]    Starting something
 #
-say_with_time() {
+say() {
   echo "[$(date '+%H:%M:%S')]    $1"
 }
 

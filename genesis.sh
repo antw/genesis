@@ -58,7 +58,7 @@ if [ -f "$genesis_path/servers/$1.sh" ] ; then
   say_header "All done!"
 
   if [[ "${genesis_dry_run:-""}" = '1' ]] ; then
-    say_with_time "Dry run log saved to log/dry-run.txt"
+    say "Dry run log saved to log/dry-run.txt"
   fi
 else
   echo "No such server: $1"

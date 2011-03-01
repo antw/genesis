@@ -23,7 +23,7 @@ copy_component_files() {
   # naive pluralisation - - - - - - - ^
 
   if [ -d "$component_dir" ] ; then
-    say_with_time "Copying $2 $1 files"
+    say "Copying $2 $1 files"
     run "cp -r $component_dir/* /"
   else
     echo "No files to copy at $component_dir"

@@ -12,7 +12,7 @@ install_package() {
   local package_name=$1
 
   if [ $( array_contains $package_name ${installed_packages[@]} ) = -1 ] ; then
-    say_with_time "Installing package: ${package_name}"
+    say "Installing package: ${package_name}"
     run "aptitude install -y ${package_name}"
     array_push 'installed_packages' $package_name
   fi

@@ -1,1 +1,1 @@
-run_recipe 'memcached'
+run_recipe 'sphinx'
