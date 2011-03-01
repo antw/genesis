@@ -22,7 +22,7 @@ copy_component_files() {
   local type=$1
   local name=$2
   local component_dir="${genesis_path}/${type}s/${name}"
-  # naive pluralisation - - - - - - - ^
+  # naive pluralisation - - - - - - - - - - - ^
 
   if [ -d "${component_dir}" ] ; then
     say "Copying ${name} ${type} files"
