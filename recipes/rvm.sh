@@ -16,7 +16,7 @@
 #  source '/usr/local/lib/rvm'
 #
 
-run 'install_package "curl"'
+install_package 'curl'
 run 'bash < <( curl -L -s http://bit.ly/rvm-install-system-wide )'
 
 # Packages required for building Ruby.
