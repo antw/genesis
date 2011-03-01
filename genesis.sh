@@ -36,6 +36,10 @@ esac
 declare -r genesis_path="$( cd "$( dirname "$0" )" && pwd )"
 declare -r genesis_tmp_path="$genesis_path/tmp"
 
+if [[ "${genesis_dry_run:-""}" = '1' ]] ; then
+  cat </dev/null > "${genesis_path}/log/dry-run.txt"
+fi
+
 # Load lib/*
 
 for file in $genesis_path/lib/*.sh ; do
@@ -50,6 +54,10 @@ if [ -f "$genesis_path/servers/$1.sh" ] ; then
 
   run_server $1
   say_header "All done!"
+
+  if [[ "${genesis_dry_run:-""}" = '1' ]] ; then
+    say_with_time "Dry run log saved to log/dry-run.txt"
+  fi
 else
   echo "No such server: $1"
   exit 1
