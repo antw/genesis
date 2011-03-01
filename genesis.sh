@@ -8,7 +8,6 @@
 #   ssh -t user@server "./genesis.sh app-server"
 #
 
-set -o nounset    # Exit immediately if an unknown variable is encountered.
 set -o errexit    # Exit if any command exits with non-zero status.
 shopt -s extglob  # Extended globs
 
@@ -24,6 +23,13 @@ else
   echo "Nothing found at /etc/lsb-release. Not Ubuntu?"
   exit 1
 fi
+
+# Arguments.
+
+case "$1" in
+  --dry-run) declare -r genesis_dry_run=1 ; shift ;;
+  --verbose) declare -r genesis_verbose=1 ; shift ;;
+esac
 
 # Genesis setup.
 

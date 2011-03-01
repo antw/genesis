@@ -8,10 +8,9 @@ run() {
     # If this is a dry run, we output the command to a file...
     # Not yet implemented.
     echo 'How did you get here?'
-  elif [[ 0 -eq 1 ]] ; then
+  elif [[ "${genesis_verbose:-""}" = '1' ]] ; then
     # Verbose mode is enabled, just run the command.
-    # Verbose mode? Not yet implemented.
-    echo '... or here?!'
+    eval "${cmd}"
   else
     # Silence output, and run command.
     # Todo, output errors to ./log/run-log.txt
