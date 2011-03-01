@@ -21,11 +21,11 @@ __install_ruby_enterprise () {
   esac
 
   retrieve_file \
-    $file \
-    "http://rubyenterpriseedition.googlecode.com/files/$file" \
-    $crc
+    "${file}" \
+    "http://rubyenterpriseedition.googlecode.com/files/${file}" \
+    "${crc}"
 
-  dpkg --install "$genesis_tmp_path/$file"
+  dpkg --install "${genesis_tmp_path}/${file}"
 }
 
 __install_ruby_enterprise

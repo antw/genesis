@@ -27,19 +27,19 @@ done
 # Genesis setup.
 
 declare -r genesis_path="$( cd "$( dirname "$0" )" && pwd )"
-declare -r genesis_tmp_path="$genesis_path/tmp"
+declare -r genesis_tmp_path="${genesis_path}/tmp"
 
 # Load lib/*
 
-for file in $genesis_path/lib/*.sh ; do
-  if [[ $(basename $file) = "os-requirement.sh" ]] ; then
+for file in ${genesis_path}/lib/*.sh ; do
+  if [[ $(basename ${file}) = "os-requirement.sh" ]] ; then
     if [[ "${genesis_dry_run:-"0"}" = '1' ]] ; then
       # Don't require Ubuntu when doing dry runs.
       continue
     fi
   fi
 
-  source $file
+  source "${file}"
 done
 
 # Set up logs, and dry run.
@@ -52,7 +52,7 @@ fi
 
 # Off we go...!
 
-if [ -f "$genesis_path/servers/${server_name}.sh" ] ; then
+if [ -f "${genesis_path}/servers/${server_name}.sh" ] ; then
   if [[ "${genesis_no_boot:-"0"}" = "0" ]] ; then
     # Skip bootstrap if --no-bootstrap
     run_recipe "bootstrap"
@@ -66,6 +66,6 @@ if [ -f "$genesis_path/servers/${server_name}.sh" ] ; then
     say "Dry run log saved to log/dry-run.txt"
   fi
 else
-  echo "No such server: $1"
+  echo "No such server: ${server_name:-"None specified"}"
   exit 1
 fi

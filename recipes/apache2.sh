@@ -19,9 +19,9 @@ reload_apache() {
 install_package 'apache2'
 
 # These _should_ exist already, but just to be sure...
-create_dir "$apache_dir/ssl"    "u=rwx,go=rx" "root:root"
-create_dir "$apache_dir/conf.d" "u=rwx,go=rx" "root:root"
-create_dir "$apache_cache_dir"  "u=rwx,go=rx" "root:root"
+create_dir "${apache_dir}/ssl"    "u=rwx,go=rx" "root:root"
+create_dir "${apache_dir}/conf.d" "u=rwx,go=rx" "root:root"
+create_dir "${apache_cache_dir}"  "u=rwx,go=rx" "root:root"
 
 copy_recipe_files "apache2"
 restart_apache

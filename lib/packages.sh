@@ -11,10 +11,10 @@ installed_packages=( '' )
 install_package() {
   local package_name=$1
 
-  if [ $( array_contains $package_name ${installed_packages[@]} ) = -1 ] ; then
+  if [ $( array_contains ${package_name} ${installed_packages[@]} ) = -1 ] ; then
     say "Installing package: ${package_name}"
     run "aptitude install -y ${package_name}"
-    array_push 'installed_packages' $package_name
+    array_push 'installed_packages' "${package_name}"
   fi
 
   return 0

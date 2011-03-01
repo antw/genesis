@@ -9,11 +9,11 @@ run_recipes=( '' )
 run_recipe() {
   local recipe_name=$1
 
-  if [ $( array_contains $recipe_name ${run_recipes[@]} ) = -1 ] ; then
-    say_header "Running recipe: $recipe_name"
-    __run_component "recipe" $recipe_name
-    array_push 'run_recipes' $recipe_name
-    say_end_header "Finished recipe: $recipe_name"
+  if [ $( array_contains ${recipe_name} ${run_recipes[@]} ) = -1 ] ; then
+    say_header "Running recipe: ${recipe_name}"
+    __run_component "recipe" "${recipe_name}"
+    array_push 'run_recipes' "${recipe_name}"
+    say_end_header "Finished recipe: ${recipe_name}"
   fi
 
   return 0
@@ -39,19 +39,21 @@ run_server() {
 #
 __run_component() {
 
-  local component_path="$genesis_path/$1s/$2.sh"
-  # naive pluralisation - - - - - - - ^
+  local type=$1
+  local name=$2
+  local path="${genesis_path}/${type}s/${name}.sh"
+  # naive pluralisation - - - - - - - - - - - - - - - - ^
 
-  if [[ "$2" = "" ]] ; then
-    echo "Called run_$1 with no $1 provided"
+  if [[ "${name}" = "" ]] ; then
+    echo "Called run_${type} with no ${name} provided"
     exit 1
 
-  elif [ -f "$component_path" ] ; then
-    source "$component_path"
+  elif [ -f "${path}" ] ; then
+    source "${path}"
     return 0
 
   else
-    echo "No such $1: $2"
+    echo "No such ${type}: ${path}"
     exit 1
 
   fi

@@ -2,8 +2,8 @@
 
 if [ -f "/etc/lsb-release" ] ; then
   source /etc/lsb-release
-  if [[ ! $DISTRIB_RELEASE = '10.04' ]] ; then
-    echo "Genesis requires Ubuntu 10.04. You have $DISTRIB_RELEASE"
+  if [[ ! "${DISTRIB_RELEASE}" = '10.04' ]] ; then
+    echo "Genesis requires Ubuntu 10.04. You have ${DISTRIB_RELEASE}"
     exit 1
   fi
 else
