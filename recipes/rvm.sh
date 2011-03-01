@@ -17,7 +17,7 @@
 #
 
 run 'install_package "curl"'
-run 'bash < <( curl -L http://bit.ly/rvm-install-system-wide )'
+run 'bash < <( curl -L -s http://bit.ly/rvm-install-system-wide )'
 
 # Packages required for building Ruby.
 install_package 'build-essential'
