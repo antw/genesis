@@ -9,6 +9,7 @@
 #
 
 set -o errexit    # Exit if any command exits with non-zero status.
+set -o errtrace
 shopt -s extglob  # Extended globs
 
 # Arguments.
@@ -43,6 +44,9 @@ for file in ${genesis_path}/lib/*.sh ; do
 
   source "${file}"
 done
+
+# Inform the user when something goes wrong: 1/HUP 2/INT 3/QUIT 15/TERM ERR
+trap 'say_error "Something went wrong: look at logs/run.log"; exit' 1 2 3 15 ERR
 
 # Set up logs, and dry run.
 
