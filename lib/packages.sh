@@ -13,7 +13,7 @@ install_package() {
 
   if [ $( array_contains ${package_name} ${installed_packages[@]} ) = -1 ] ; then
     say "Installing package: ${package_name}"
-    run "aptitude install -y ${package_name}"
+    run "aptitude install -y -q ${package_name}"
     array_push 'installed_packages' "${package_name}"
   fi
 
