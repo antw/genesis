@@ -23,8 +23,8 @@ mysql_restart() {
   run 'service mysql restart'
 }
 
-mysql_root_password="${mysql_root_password:-"$(openssl_random_password)"}"
-mysql_sys_maint_password="${mysql_sys_maint_password:-"$(openssl_random_password)"}"
+: ${mysql_root_password:="$(openssl_random_password)"}
+: ${mysql_sys_maint_password:="$(openssl_random_password)"}
 
 # Warn about insecure dry runs.
 if [[ "${genesis_dry_run:-"0"}" = "1" ]] ; then
