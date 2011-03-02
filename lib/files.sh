@@ -54,10 +54,23 @@ replace_in() {
   local replace=$(__escape_for_sed "${3}")
   local tmp="${path}.tmp"
 
+  if [[ ! -f "${path}" ]] ; then
+    echo "No such file to replace in: ${path}"
+    exit 1
+  elif [[ ! -r "${path}" ]] ; then
+    echo "File is not readable: ${path}"
+    exit 1
+  elif [[ ! -w "${path}" ]] ; then
+    echo "File is not writable: ${path}"
+    exit 1
+  fi
+
   # sed needs to be wrapped in ( ... ) in order to get around
   # non-verbose mode redirecting output.
   run "( sed -e 's/##${search}##/${replace}/' '${path}' > '${tmp}' ; )"
   run "mv -f ${tmp} ${path}"
+
+  return 0
 }
 
 # Escapes search and replace patterns making them safe for use in sed.
