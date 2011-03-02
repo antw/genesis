@@ -9,11 +9,11 @@ GRANT
   REPLICATION SLAVE, REPLICATION CLIENT
 ON *.*
 TO 'debian-sys-maint'@'localhost'
-IDENTIFIED BY 'debian-sys-maint-changeme'
+IDENTIFIED BY '##SysMaintPassword##'
 WITH GRANT OPTION;
 
 # Grant replication for a slave user.
-# GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%' identified by '<%= node[:mysql][:server_repl_password] %>';
+# GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%' identified by '##ReplPassword##';
 
 # Set the server root password. This should be preseeded by the package installation.
-SET PASSWORD FOR 'root'@'localhost' = PASSWORD('changeme');
+SET PASSWORD FOR 'root'@'localhost' = PASSWORD('##RootPassword##');

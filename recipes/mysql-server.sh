@@ -9,6 +9,10 @@ mysql_restart() {
   run 'service mysql restart'
 }
 
+mysql_root_password="${mysql_root_password:-"changeme"}"
+mysql_sys_maint_password="${mysql_root_password:-"changeme"}"
+mysql_repl_password="${mysql_repl_password:-"changeme"}"
+
 # Pre-install setup.
 # ----------------------------------------------------------------------------
 
@@ -32,6 +36,9 @@ run "cp '${genesis_path}/recipes/mysql-server/debian.cnf' /etc/mysql/debian.cnf"
 run 'chown root:root /etc/mysql/debian.cnf'
 run 'chmod u=rw,go=  /etc/mysql/debian.cnf'
 
+replace_in "${mysql_preseed_path}" 'RootPassword'     "${mysql_root_password}"
+replace_in '/etc/mysql/debian.cnf' 'SysMaintPassword' "${mysql_sys_maint_password}"
+
 # Package installation.
 # ----------------------------------------------------------------------------
 
@@ -40,7 +47,6 @@ install_package 'mysql-server'
 # Post-install setup.
 # ----------------------------------------------------------------------------
 
-say 'Copying my.cnf'
 run "cp '${genesis_path}/recipes/mysql-server/my.cnf' /etc/mysql/my.cnf"
 run 'chown root:root /etc/mysql/my.cnf'
 run 'chmod u=rw,go=r /etc/mysql/my.cnf'
@@ -48,9 +54,14 @@ run 'chmod u=rw,go=r /etc/mysql/my.cnf'
 mysql_restart
 
 # Set up the grants table.
-say 'Copying grants.sql'
+say 'Setting up grants'
 run "cp '${genesis_path}/recipes/mysql-server/grants.sql' /etc/mysql/grants.sql"
 run 'chown root:root /etc/mysql/grants.sql'
 run 'chmod u=rw,go=  /etc/mysql/grants.sql'
+
+# Set passwords in grants.sql
+replace_in '/etc/mysql/grants.sql' 'RootPassword'     "${mysql_root_password}"
+replace_in '/etc/mysql/grants.sql' 'SysMaintPassword' "${mysql_sys_maint_password}"
+replace_in '/etc/mysql/grants.sql' 'ReplPassword'     "${mysql_repl_password}"
 
 run '/usr/bin/mysql -uroot -pchangeme < /etc/mysql/grants.sql'
