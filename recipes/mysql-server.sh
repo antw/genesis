@@ -3,15 +3,28 @@
 #
 # The files in recipies/mysql-client are not to be copied using
 # copy_recipe_files, but are copied manually.
+#
+# It is _strongly_ recommended that you manually set the following
+# variables at the top of your server component prior to running the
+# mysql-server recipe:
+#
+#   mysql_root_password
+#     # => The password for the MySQL root user.
+#   mysql_sys_maint_password
+#     # => The password for the debian-sys-maint user.
+#
+# If these are not set, the recipe will use randomly generated passwords
+# (which root -- and only root -- can read from /etc/mysql/grants.sql)
+# and you will not be able to run the recipe more than once without it
+# breaking.
 
 mysql_restart() {
   say 'Restarting MySQL'
   run 'service mysql restart'
 }
 
-mysql_root_password="${mysql_root_password:-"changeme"}"
-mysql_sys_maint_password="${mysql_root_password:-"changeme"}"
-mysql_repl_password="${mysql_repl_password:-"changeme"}"
+mysql_root_password="${mysql_root_password:-"$(openssl_random_password)"}"
+mysql_sys_maint_password="${mysql_sys_maint_password:-"$(openssl_random_password)"}"
 
 # Warn about insecure dry runs.
 if [[ "${genesis_dry_run:-"0"}" = "1" ]] ; then
@@ -21,8 +34,6 @@ fi
 
 # Pre-install setup.
 # ----------------------------------------------------------------------------
-
-run_recipe 'mysql-client'
 
 create_dir '/var/cache/local/preseeding' 'u=rwx,go=rx' 'root:root'
 
@@ -37,6 +48,8 @@ run "chown root:root '${mysql_preseed_path}'"
 run "chmod u=rw,go=  '${mysql_preseed_path}'"
 
 run 'debconf-set-selections /var/cache/local/preseeding/mysql-server.seed'
+
+run_recipe 'mysql-client'
 
 run "cp '${genesis_path}/recipes/mysql-server/debian.cnf' /etc/mysql/debian.cnf"
 run 'chown root:root /etc/mysql/debian.cnf'
@@ -68,6 +81,5 @@ run 'chmod u=rw,go=  /etc/mysql/grants.sql'
 # Set passwords in grants.sql
 replace_in '/etc/mysql/grants.sql' 'RootPassword'     "${mysql_root_password}"
 replace_in '/etc/mysql/grants.sql' 'SysMaintPassword' "${mysql_sys_maint_password}"
-replace_in '/etc/mysql/grants.sql' 'ReplPassword'     "${mysql_repl_password}"
 
-run '/usr/bin/mysql -uroot -pchangeme < /etc/mysql/grants.sql'
+run "/usr/bin/mysql -u root -p${mysql_root_password} < /etc/mysql/grants.sql"
