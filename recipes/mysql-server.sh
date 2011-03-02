@@ -13,6 +13,12 @@ mysql_root_password="${mysql_root_password:-"changeme"}"
 mysql_sys_maint_password="${mysql_root_password:-"changeme"}"
 mysql_repl_password="${mysql_repl_password:-"changeme"}"
 
+# Warn about insecure dry runs.
+if [[ "${genesis_dry_run:-"0"}" = "1" ]] ; then
+  say_error 'SECURITY WARNING: Your MySQL passwords will be stored in'
+  say       '  plain-text in the dry-run file. Be sure to keep it safe!'
+fi
+
 # Pre-install setup.
 # ----------------------------------------------------------------------------
 
