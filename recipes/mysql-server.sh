@@ -35,6 +35,8 @@ fi
 # Pre-install setup.
 # ----------------------------------------------------------------------------
 
+run_recipe 'mysql-client'
+
 create_dir '/var/cache/local/preseeding' 'u=rwx,go=rx' 'root:root'
 
 # Pre-seed MySQL server settings for unattended package install.
@@ -47,15 +49,15 @@ run "cp '${genesis_path}/recipes/mysql-server/mysql-server.seed' '${mysql_presee
 run "chown root:root '${mysql_preseed_path}'"
 run "chmod u=rw,go=  '${mysql_preseed_path}'"
 
-run 'debconf-set-selections /var/cache/local/preseeding/mysql-server.seed'
+replace_in "${mysql_preseed_path}" 'RootPassword'     "${mysql_root_password}"
 
-run_recipe 'mysql-client'
+run 'debconf-set-selections /var/cache/local/preseeding/mysql-server.seed'
 
 run "cp '${genesis_path}/recipes/mysql-server/debian.cnf' /etc/mysql/debian.cnf"
 run 'chown root:root /etc/mysql/debian.cnf'
 run 'chmod u=rw,go=  /etc/mysql/debian.cnf'
 
-replace_in "${mysql_preseed_path}" 'RootPassword'     "${mysql_root_password}"
+replace_in '/etc/mysql/debian.cnf' 'RootPassword'     "${mysql_root_password}"
 replace_in '/etc/mysql/debian.cnf' 'SysMaintPassword' "${mysql_sys_maint_password}"
 
 # Package installation.
