@@ -43,3 +43,25 @@ retrieve_file() {
 
   fi
 }
+
+# Given a path to a file, a search string and a replacement string, uses
+# sed to replace the search string. Uses a temporary file, so write
+# permissions are required in the target directory.
+#
+replace_in() {
+  local path=$1
+  local search=$(__escape_for_sed "${2}")
+  local replace=$(__escape_for_sed "${3}")
+  local tmp="${path}.tmp"
+
+  # sed needs to be wrapped in ( ... ) in order to get around
+  # non-verbose mode redirecting output.
+  run "( sed -e 's/##${search}##/${replace}/' '${path}' > '${tmp}' ; )"
+  run "mv -f ${tmp} ${path}"
+}
+
+# Escapes search and replace patterns making them safe for use in sed.
+__escape_for_sed() {
+  escaped=$(echo "${1}" | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/&/\\\&/g')
+  echo $escaped
+}
