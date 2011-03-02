@@ -1,1 +1,1 @@
-run_recipe 'sphinx'
+run_recipe 'mysql-server'
