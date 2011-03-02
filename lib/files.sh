@@ -54,15 +54,17 @@ replace_in() {
   local replace=$(__escape_for_sed "${3}")
   local tmp="${path}.tmp"
 
-  if [[ ! -f "${path}" ]] ; then
-    echo "No such file to replace in: ${path}"
-    exit 1
-  elif [[ ! -r "${path}" ]] ; then
-    echo "File is not readable: ${path}"
-    exit 1
-  elif [[ ! -w "${path}" ]] ; then
-    echo "File is not writable: ${path}"
-    exit 1
+  if [[ "${genesis_dry_run:-"0"}" = "0" ]] ; then
+    if [[ ! -f "${path}" ]] ; then
+      echo "No such file to replace in: ${path}"
+      exit 1
+    elif [[ ! -r "${path}" ]] ; then
+      echo "File is not readable: ${path}"
+      exit 1
+    elif [[ ! -w "${path}" ]] ; then
+      echo "File is not writable: ${path}"
+      exit 1
+    fi
   fi
 
   # sed needs to be wrapped in ( ... ) in order to get around
