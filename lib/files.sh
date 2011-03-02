@@ -70,7 +70,10 @@ replace_in() {
   # sed needs to be wrapped in ( ... ) in order to get around
   # non-verbose mode redirecting output.
   run "( sed -e 's/##${search}##/${replace}/' '${path}' > '${tmp}' ; )"
-  run "mv -f ${tmp} ${path}"
+
+  # Preserve permissions on the original by copying, rather than moving.
+  run "cp -f ${tmp} ${path}"
+  run "rm ${tmp}"
 
   return 0
 }

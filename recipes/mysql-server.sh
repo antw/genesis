@@ -55,7 +55,7 @@ run "cp '${genesis_path}/recipes/mysql-server/mysql-server.seed' '${mysql_presee
 run "chown root:root '${mysql_preseed_path}'"
 run "chmod u=rw,go=  '${mysql_preseed_path}'"
 
-replace_in "${mysql_preseed_path}" 'RootPassword'     "${mysql_root_password}"
+replace_in "${mysql_preseed_path}" 'RootPassword' "${mysql_root_password}"
 
 run 'debconf-set-selections /var/cache/local/preseeding/mysql-server.seed'
 
