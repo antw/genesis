@@ -26,6 +26,12 @@ mysql_restart() {
 : ${mysql_root_password:="$(openssl_random_password)"}
 : ${mysql_sys_maint_password:="$(openssl_random_password)"}
 
+: ${mysql_bind_address:="127.0.0.1"}
+: ${mysql_key_buffer:="256M"}
+: ${mysql_max_allowed_packet:="16M"}
+: ${mysql_thread_stack:="256K"}
+: ${mysql_max_connections:="800"}
+
 # Warn about insecure dry runs.
 if [[ "${genesis_dry_run:-"0"}" = "1" ]] ; then
   say_error 'SECURITY WARNING: Your MySQL passwords will be stored in'
@@ -71,6 +77,12 @@ install_package 'mysql-server'
 run "cp '${genesis_path}/recipes/mysql-server/my.cnf' /etc/mysql/my.cnf"
 run 'chown root:root /etc/mysql/my.cnf'
 run 'chmod u=rw,go=r /etc/mysql/my.cnf'
+
+replace_in '/etc/mysql/my.cnf' 'BindAddress'      "${mysql_bind_address}"
+replace_in '/etc/mysql/my.cnf' 'KeyBuffer'        "${mysql_key_buffer}"
+replace_in '/etc/mysql/my.cnf' 'MaxAllowedPacket' "${mysql_max_allowed_packet}"
+replace_in '/etc/mysql/my.cnf' 'ThreadStack'      "${mysql_thread_stack}"
+replace_in '/etc/mysql/my.cnf' 'MaxConnections'   "${mysql_max_connections}"
 
 mysql_restart
 
